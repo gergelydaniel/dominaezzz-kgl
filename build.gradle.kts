@@ -4,21 +4,15 @@ import org.jetbrains.kotlin.konan.target.*
 import java.io.*
 
 plugins {
-	kotlin("multiplatform") version ("1.4.10") apply false
+	kotlin("multiplatform") version ("1.6.20") apply false
 	id("de.undercouch.download") version ("3.4.3") apply false
 }
 
-val stdout = ByteArrayOutputStream()
-exec {
-	commandLine("git", "describe", "--tags")
-	standardOutput = stdout
-}
-
 group = "com.kgl"
-version = stdout.toString().trim()
+version = "0.1.11-versionbump"
 
 val useSingleTarget: Boolean by extra { System.getProperty("idea.active") == "true" }
-val ktorIoVersion: String by extra("1.4.0")
+val ktorIoVersion: String by extra("2.0.0")
 val lwjglVersion: String by extra("3.2.2") //TODO 3.2.3 causes kgl-vulkan compile to fail
 val lwjglNatives: String by extra {
 	when {
